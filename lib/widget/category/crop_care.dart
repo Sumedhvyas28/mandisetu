@@ -14,7 +14,7 @@ class _CropCarePageState extends State<CropCarePage> {
     {
       "crop": "Tomato",
       "tip":
-          "Tomatoes require a lot of sunlight. Water regularly but ensure the soil drains well to prevent root rot."
+          "Tomatoes require a lot of sunlight. Water regularly but ensure the soil drains well to prevent root."
     },
     {
       "crop": "Carrot",
