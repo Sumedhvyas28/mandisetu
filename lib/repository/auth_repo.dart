@@ -1,9 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:mandisetu/constants/api_constants/routes/api_routes.dart';
 import 'package:mandisetu/data/network/BaseApiService.dart';
 import 'package:mandisetu/data/network/NetworkApiService.dart';
 import 'package:http/http.dart' as http;
+import 'package:mandisetu/model/user_data.dart';
 import 'package:mandisetu/model/user_model.dart';
+import 'package:mandisetu/viewmodel/user_session.dart';
+import 'package:provider/provider.dart';
 
 class AuthRepository {
   BaseApiServices _apiServices = NetworkApiService();
@@ -29,7 +34,7 @@ class AuthRepository {
     String? statement,
     String? image,
   }) async {
-    final url = Uri.parse('https://stagging.jookwang.me/api/register');
+    final url = Uri.parse('https://mandisetu.in/api/register');
 
     var requestMultipart = http.MultipartRequest('POST', url)
       ..fields['name'] = name
@@ -48,23 +53,28 @@ class AuthRepository {
       ..fields['mandi_license_no'] = mandiLicenseNo;
 
     if (mandiLicense != null) {
-      requestMultipart.files.add(await http.MultipartFile.fromPath('mandi_license', mandiLicense));
+      requestMultipart.files.add(
+          await http.MultipartFile.fromPath('mandi_license', mandiLicense));
     }
 
     if (aadharCard != null) {
-      requestMultipart.files.add(await http.MultipartFile.fromPath('aadhar_card', aadharCard));
+      requestMultipart.files
+          .add(await http.MultipartFile.fromPath('aadhar_card', aadharCard));
     }
 
     if (panCard != null) {
-      requestMultipart.files.add(await http.MultipartFile.fromPath('pan_card', panCard));
+      requestMultipart.files
+          .add(await http.MultipartFile.fromPath('pan_card', panCard));
     }
 
     if (statement != null) {
-      requestMultipart.files.add(await http.MultipartFile.fromPath('statement', statement));
+      requestMultipart.files
+          .add(await http.MultipartFile.fromPath('statement', statement));
     }
 
     if (image != null) {
-      requestMultipart.files.add(await http.MultipartFile.fromPath('image', image));
+      requestMultipart.files
+          .add(await http.MultipartFile.fromPath('image', image));
     }
 
     final response = await requestMultipart.send();
@@ -81,16 +91,46 @@ class AuthRepository {
     }
   }
 
-
-  Future<UserModel> loginRepo(dynamic data) async {
+  Future<UserModel> loginRepo(dynamic data, BuildContext context) async {
     try {
-      dynamic response = await _apiServices.getPostApiResponse("https://stagging.jookwang.me/api/login", data);
-      return response = UserModel.fromJson(response);
+      dynamic response =
+          await _apiServices.getPostApiResponse(AppUrl.loginUrl, data);
+
+      if (response != null) {
+        dynamic userData = response['user'];
+        String token = response['token'];
+
+        // Save the user data and token in UserSession
+        await Provider.of<UserSession>(context, listen: false).storeUserData({
+          'user': {
+            'id': userData['id'],
+            'name': userData['name'],
+            'email': userData['email'],
+            'phone': userData['phone'],
+            'role': userData['role'],
+          },
+          'token': token,
+        });
+
+        // You can now return the UserModel or handle the response accordingly
+        return UserModel.fromJson(response);
+      } else {
+        throw Exception("Failed to load login data.");
+      }
     } catch (e) {
-      print('❌❌ Error in  Login ${e}');
+      print('❌❌ Error in Login: $e');
       throw e;
     }
   }
 
-
+  Future<UserData> getUserDataRepo(dynamic header) async {
+    try {
+      dynamic response = await _apiServices.getGetApiWithHeaderResponse(
+          AppUrl.userDataUrl, header);
+      return response = UserData.fromJson(response);
+    } catch (e) {
+      print('❌❌ Error in getUserDataRepo Repo ${e}');
+      throw e;
+    }
+  }
 }

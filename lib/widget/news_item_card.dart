@@ -27,7 +27,7 @@ class NewsItemCard extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5),
                 child: Image.network(
-                  "https://stagging.jookwang.me/NewsImages/${news.image}",
+                  "https://mandisetu.in/NewsImages/${news.image}",
                   fit: BoxFit.cover,
                 ),
               ),

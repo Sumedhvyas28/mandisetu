@@ -16,7 +16,6 @@ class CustomBottomTab extends StatefulWidget {
 }
 
 class _CustomBottomTabState extends State<CustomBottomTab> {
-
   final List<Widget> _screens = [
     const HomeView(),
     const ProductsView(),
@@ -24,12 +23,12 @@ class _CustomBottomTabState extends State<CustomBottomTab> {
     TraderDashboardScreen(),
   ];
 
-
   @override
   Widget build(BuildContext context) {
     final utilsProvider = Provider.of<UtilsProvider>(context);
 
-    Widget _buildTabItem({required int index, required Widget icon, required String label}) {
+    Widget _buildTabItem(
+        {required int index, required Widget icon, required String label}) {
       return Expanded(
         child: InkWell(
           onTap: () => utilsProvider.setCurrentIndex(index),
@@ -42,8 +41,8 @@ class _CustomBottomTabState extends State<CustomBottomTab> {
               Text(
                 label,
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                  color: Colors.white,
-                ),
+                      color: Colors.white,
+                    ),
               ),
             ],
           ),
@@ -69,20 +68,28 @@ class _CustomBottomTabState extends State<CustomBottomTab> {
                 index: 0,
                 icon: Icon(
                   Icons.home,
-                  color: utilsProvider.currentIndex == 0 ? Colors.white : Colors.white70,
+                  color: utilsProvider.currentIndex == 0
+                      ? Colors.white
+                      : Colors.white70,
                 ),
                 label: 'Home',
               ),
               _buildTabItem(
                 index: 1,
-                icon: Image.asset('assets/images/product_icon.png', color: utilsProvider.currentIndex == 1 ? Colors.white : Colors.white70, height: 20),
+                icon: Image.asset('assets/images/product_icon.png',
+                    color: utilsProvider.currentIndex == 1
+                        ? Colors.white
+                        : Colors.white70,
+                    height: 20),
                 label: 'Products',
               ),
               _buildTabItem(
                 index: 2,
                 icon: Icon(
                   Icons.auto_graph,
-                  color: utilsProvider.currentIndex == 2 ? Colors.white : Colors.white70,
+                  color: utilsProvider.currentIndex == 2
+                      ? Colors.white
+                      : Colors.white70,
                 ),
                 label: 'Rates',
               ),
@@ -90,7 +97,9 @@ class _CustomBottomTabState extends State<CustomBottomTab> {
                 index: 3,
                 icon: Icon(
                   Icons.account_balance_wallet,
-                  color: utilsProvider.currentIndex == 3 ? Colors.white : Colors.white70,
+                  color: utilsProvider.currentIndex == 3
+                      ? Colors.white
+                      : Colors.white70,
                 ),
                 label: 'Payments',
               ),

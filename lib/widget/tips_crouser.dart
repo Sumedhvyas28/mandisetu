@@ -51,8 +51,7 @@ class _TipsCarouselState extends State<TipsCarousel> {
             case Status.ERROR:
               return const SizedBox();
             case Status.COMPLETED:
-
-              if(value.allBannerList.data!.banner!.isEmpty) {
+              if (value.allBannerList.data!.banner!.isEmpty) {
                 return const SizedBox();
               }
 
@@ -86,13 +85,14 @@ class _TipsCarouselState extends State<TipsCarousel> {
                             ),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.0),
-                              border: Border.all(color: StyleConstants.darkGreen),
+                              border:
+                                  Border.all(color: StyleConstants.darkGreen),
                             ),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10.0),
                               child: CachedNetworkImage(
                                 imageUrl:
-                                    'https://stagging.jookwang.me/BannerImages/${imageUrl}',
+                                    'https://mandisetu.in/BannerImages/${imageUrl}',
                                 fit: BoxFit.fitWidth,
                                 width: MediaQuery.of(context).size.width,
                                 placeholder: (context, url) =>
@@ -120,4 +120,3 @@ class _TipsCarouselState extends State<TipsCarousel> {
     );
   }
 }
-

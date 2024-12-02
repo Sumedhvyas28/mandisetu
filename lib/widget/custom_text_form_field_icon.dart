@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
 
 class CustomTextFormFieldWithIcon extends StatelessWidget {
-  const CustomTextFormFieldWithIcon({super.key, required this.controller, required this.prefixIcon, required this.label});
+  const CustomTextFormFieldWithIcon(
+      {super.key,
+      required this.controller,
+      required this.prefixIcon,
+      required this.label,
+      this.validator,
+      this.obscureText,
+      this.focusNode});
 
   final TextEditingController controller;
   final IconData prefixIcon;
   final String label;
+  final String? Function(String?)? validator;
+
+  final dynamic obscureText;
+
+  final dynamic focusNode;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +37,7 @@ class CustomTextFormFieldWithIcon extends StatelessWidget {
           disabledBorder: InputBorder.none,
           labelStyle: const TextStyle(color: Colors.black),
         ),
+        validator: validator,
       ),
     );
   }

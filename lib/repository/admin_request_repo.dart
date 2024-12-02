@@ -13,7 +13,7 @@ class AdminRequestRepo {
   Future<PurchaseRequest> getPurchaseRequestRepo(dynamic header) async {
     try {
       dynamic response = await _apiServices.getGetApiWithHeaderResponse(
-          'https://stagging.jookwang.me/api/get-purchase-request', header);
+          'https://mandisetu.in/api/get-purchase-request', header);
       return response = PurchaseRequest.fromJson(response);
     } catch (e) {
       print('❌❌ Error in Purchase request $e');
@@ -21,7 +21,7 @@ class AdminRequestRepo {
     }
   }
 
-  final String baseUrl = "https://stagging.jookwang.me/api";
+  final String baseUrl = "https://mandisetu.in/api";
 
   Future<Map<String, dynamic>> uploadBanner({
     required List<String> images,
@@ -61,7 +61,7 @@ class AdminRequestRepo {
     required String desc,
     required String image,
   }) async {
-    final url = Uri.parse('https://stagging.jookwang.me/api/upload-news');
+    final url = Uri.parse('https://mandisetu.in/api/upload-news');
 
     var requestMultipart = http.MultipartRequest('POST', url)
       ..fields['title'] = title
@@ -87,7 +87,7 @@ class AdminRequestRepo {
   Future<Banner> getBannerRepo(dynamic header) async {
     try {
       dynamic response = await _apiServices.getGetApiWithHeaderResponse(
-          'https://stagging.jookwang.me/api/banner', header);
+          'https://mandisetu.in/api/banner', header);
       return response = Banner.fromJson(response);
     } catch (e) {
       print('❌❌ Error in Purchase request $e');
@@ -99,7 +99,7 @@ class AdminRequestRepo {
       dynamic data, dynamic header, dynamic id) async {
     try {
       dynamic response = await _apiServices.getPostApiWithHeaderResponse(
-          'https://stagging.jookwang.me/api/delete-banner/$id', data, header);
+          'https://mandisetu.in/api/delete-banner/$id', data, header);
       return response;
     } catch (e) {
       print('❌❌ $e');
@@ -107,11 +107,10 @@ class AdminRequestRepo {
     }
   }
 
-  Future<void> deleteNewsRepo(
-      dynamic data, dynamic header, dynamic id) async {
+  Future<void> deleteNewsRepo(dynamic data, dynamic header, dynamic id) async {
     try {
       dynamic response = await _apiServices.getPostApiWithHeaderResponse(
-          'https://stagging.jookwang.me/api/delete-news/$id', data, header);
+          'https://mandisetu.in/api/delete-news/$id', data, header);
       return response;
     } catch (e) {
       print('❌❌ $e');
@@ -122,7 +121,7 @@ class AdminRequestRepo {
   Future<NewsList> getNewsRepo(dynamic header) async {
     try {
       dynamic response = await _apiServices.getGetApiWithHeaderResponse(
-          'https://stagging.jookwang.me/api/news', header);
+          'https://mandisetu.in/api/news', header);
       return response = NewsList.fromJson(response);
     } catch (e) {
       print('❌❌ Error in Purchase request $e');
@@ -130,11 +129,13 @@ class AdminRequestRepo {
     }
   }
 
-
-  Future<void> requestApprovedRepo(dynamic data, dynamic header, dynamic id) async {
+  Future<void> requestApprovedRepo(
+      dynamic data, dynamic header, dynamic id) async {
     try {
       dynamic response = await _apiServices.getPostApiWithHeaderResponse(
-          'https://stagging.jookwang.me/api/approve-purchase-request/$id', data, header);
+          'https://mandisetu.in/api/approve-purchase-request/$id',
+          data,
+          header);
       return response;
     } catch (e) {
       print('❌❌ $e');
@@ -142,11 +143,11 @@ class AdminRequestRepo {
     }
   }
 
-
-  Future<void> requestCancelRepo(dynamic data, dynamic header, dynamic id) async {
+  Future<void> requestCancelRepo(
+      dynamic data, dynamic header, dynamic id) async {
     try {
       dynamic response = await _apiServices.getPostApiWithHeaderResponse(
-          'https://stagging.jookwang.me/api/reject-purchase-request/$id', data, header);
+          'https://mandisetu.in/api/reject-purchase-request/$id', data, header);
       return response;
     } catch (e) {
       print('❌❌ $e');
@@ -154,19 +155,17 @@ class AdminRequestRepo {
     }
   }
 
-
-  Future<void> deliveredApprovedRepo(dynamic data, dynamic header, dynamic id) async {
+  Future<void> deliveredApprovedRepo(
+      dynamic data, dynamic header, dynamic id) async {
     try {
       dynamic response = await _apiServices.getPostApiWithHeaderResponse(
-          'https://stagging.jookwang.me/api/approve-purchase-request/$id', data, header);
+          'https://mandisetu.in/api/approve-purchase-request/$id',
+          data,
+          header);
       return response;
     } catch (e) {
       print('❌❌ $e');
       throw e;
     }
   }
-
-
-
-
 }

@@ -5,6 +5,7 @@ import 'package:mandisetu/routes/routes.dart';
 import 'package:mandisetu/themes/themes.dart';
 import 'package:mandisetu/viewmodel/auth_viewmodel.dart';
 import 'package:mandisetu/viewmodel/commodity_viewmodel.dart';
+import 'package:mandisetu/viewmodel/user_session.dart';
 import 'package:mandisetu/viewmodel/utils_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -22,6 +23,7 @@ class StarterApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CommodityViewModel()),
         ChangeNotifierProvider(create: (_) => TraderViewModel()),
         ChangeNotifierProvider(create: (_) => UtilsProvider()),
+        ChangeNotifierProvider(create: (_) => UserSession()),
         ChangeNotifierProvider(create: (_) => AdminProductRequest()),
       ],
       child: MediaQuery(

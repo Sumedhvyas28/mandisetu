@@ -49,7 +49,6 @@ class _TopProductsState extends State<TopProducts> {
                           .copyWith(fontWeight: FontWeight.w700, fontSize: 18),
                     ),
                   ),
-
                   GridView.builder(
                     itemCount: 4,
                     shrinkWrap: true,
@@ -85,14 +84,17 @@ class _TopProductsState extends State<TopProducts> {
                                       borderRadius: BorderRadius.circular(5.0),
                                       child: CachedNetworkImage(
                                         imageUrl:
-                                        'https://stagging.jookwang.me/ProductImages/${item.image![0]}',
+                                            'https://mandisetu.in/ProductImages/${item.image![0]}',
                                         fit: BoxFit.cover,
-                                        width: MediaQuery.of(context).size.width,
-                                        placeholder: (context, url) => const SpinKitPulse(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        placeholder: (context, url) =>
+                                            const SpinKitPulse(
                                           size: 80,
                                           color: Colors.grey,
                                         ),
-                                        errorWidget: (context, url, error) => Image.asset(
+                                        errorWidget: (context, url, error) =>
+                                            Image.asset(
                                           "assets/images/placeholder.jpg",
                                           fit: BoxFit.cover,
                                         ),
@@ -141,7 +143,9 @@ class _TopProductsState extends State<TopProducts> {
                                           children: [
                                             Text(
                                               'Buying price',
-                                              style: Theme.of(context).textTheme.labelSmall,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelSmall,
                                             ),
                                             const Spacer(),
                                             Text(
@@ -149,7 +153,9 @@ class _TopProductsState extends State<TopProducts> {
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .labelSmall!
-                                                  .copyWith(fontWeight: FontWeight.w600),
+                                                  .copyWith(
+                                                      fontWeight:
+                                                          FontWeight.w600),
                                             ),
                                           ],
                                         ),
@@ -158,7 +164,9 @@ class _TopProductsState extends State<TopProducts> {
                                           children: [
                                             Text(
                                               'Trade volume',
-                                              style: Theme.of(context).textTheme.labelSmall,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelSmall,
                                             ),
                                             const Spacer(),
                                             Text(
@@ -166,11 +174,12 @@ class _TopProductsState extends State<TopProducts> {
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .labelSmall!
-                                                  .copyWith(fontWeight: FontWeight.w700),
+                                                  .copyWith(
+                                                      fontWeight:
+                                                          FontWeight.w700),
                                             ),
                                           ],
                                         ),
-
                                       ],
                                     ),
                                   ),
@@ -218,9 +227,7 @@ class _TopProductsState extends State<TopProducts> {
                       );
                     },
                   ),
-
                   const SizedBox(height: 10),
-
                   GestureDetector(
                     onTap: () {
                       Provider.of<UtilsProvider>(context, listen: false)
@@ -251,7 +258,6 @@ class _TopProductsState extends State<TopProducts> {
                       ),
                     ),
                   ),
-
                 ],
               );
 

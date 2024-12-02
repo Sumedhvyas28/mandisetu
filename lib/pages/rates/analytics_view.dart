@@ -167,7 +167,7 @@ class _AnalyticsViewState extends State<AnalyticsView> {
             CircleAvatar(
               radius: 60,
               backgroundImage: NetworkImage(
-                  "https://stagging.jookwang.me/StaticImage/${widget.item.image}"),
+                  "https://mandisetu.in/StaticImage/${widget.item.image}"),
             ),
             const SizedBox(width: 15),
             Column(

@@ -42,6 +42,7 @@ class _WeatherPageState extends State<WeatherPage> {
           children: [
             // Current Weather Section
             Card(
+              color: Colors.white,
               elevation: 4,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0),
@@ -101,7 +102,8 @@ class _WeatherPageState extends State<WeatherPage> {
                 itemBuilder: (context, index) {
                   final dayForecast = weeklyForecast[index];
                   return Card(
-                    elevation: 2,
+                    color: Colors.white,
+                    elevation: 4,
                     margin: const EdgeInsets.only(bottom: 12.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.0),

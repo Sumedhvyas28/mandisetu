@@ -1,9 +1,14 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:mandisetu/data/response/api_response.dart';
+import 'package:mandisetu/model/user_data.dart';
 import 'package:mandisetu/repository/auth_repo.dart';
 import 'package:mandisetu/routes/route_constants.dart';
 import 'package:flutter/foundation.dart';
+import 'package:http/http.dart' as http;
+import 'package:mandisetu/viewmodel/user_session.dart';
 
 class AuthViewModel with ChangeNotifier {
   final _myRepo = AuthRepository();
@@ -16,6 +21,15 @@ class AuthViewModel with ChangeNotifier {
     _isLoading = value;
     notifyListeners();
   }
+
+  dynamic header = {
+    HttpHeaders.authorizationHeader: 'token ${GlobalData().token}'
+  };
+
+  dynamic header1 = {
+    HttpHeaders.contentTypeHeader: 'application/json',
+    HttpHeaders.authorizationHeader: 'token ${GlobalData().token}'
+  };
 
   // ====================================================================================
 
@@ -36,12 +50,9 @@ class AuthViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  final TextEditingController nameController =
-      TextEditingController(text: "");
-  final TextEditingController phoneController =
-      TextEditingController(text: "");
-  final TextEditingController emailController =
-      TextEditingController(text: "");
+  final TextEditingController nameController = TextEditingController(text: "");
+  final TextEditingController phoneController = TextEditingController(text: "");
+  final TextEditingController emailController = TextEditingController(text: "");
   final TextEditingController mandiLicenseNoController =
       TextEditingController(text: "");
   final TextEditingController businessNameController =
@@ -52,8 +63,7 @@ class AuthViewModel with ChangeNotifier {
       TextEditingController(text: "");
   final TextEditingController aadharController =
       TextEditingController(text: "");
-  final TextEditingController panController =
-      TextEditingController(text: "");
+  final TextEditingController panController = TextEditingController(text: "");
   final TextEditingController accountNoController =
       TextEditingController(text: "");
   final TextEditingController ifscCodeController =
@@ -111,9 +121,10 @@ class AuthViewModel with ChangeNotifier {
 
   Future<void> login(context, dynamic data) async {
     setLoading(true);
-    await _myRepo.loginRepo(data).then((value) {
+    await _myRepo.loginRepo(data, context).then((value) {
       if (kDebugMode) {
         print(value.toString());
+        print(data);
       }
       setLoading(false);
       Navigator.pushReplacementNamed(context, NamedRoutes.bottomTab);
@@ -125,4 +136,20 @@ class AuthViewModel with ChangeNotifier {
     });
   }
 
+  ApiResponse<UserData> userData = ApiResponse.Loading();
+
+  setUserData(ApiResponse<UserData> response) {
+    userData = response;
+    notifyListeners();
+  }
+
+  Future<void> getUserData() async {
+    setUserData(ApiResponse.Loading());
+    _myRepo.getUserDataRepo(header).then((value) {
+      setUserData(ApiResponse.completed(value));
+    }).onError((error, stackTrace) {
+      setUserData(ApiResponse.error(error.toString()));
+    });
+    notifyListeners();
+  }
 }

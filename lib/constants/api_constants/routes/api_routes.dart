@@ -1,11 +1,10 @@
-
 class AppUrl {
-
-  static String baseUrl = "https://lankanexpress.jookwang.me/api";
+  static String baseUrl = "https://mandisetu.in/api";
 
   static String signupUrl = "$baseUrl/register";
 
   static String loginUrl = "$baseUrl/login";
+  static String userDataUrl = "$baseUrl/login";
 
   static String emailLoginUrl = "$baseUrl/emaillogin";
 
@@ -32,5 +31,4 @@ class AppUrl {
   static String assignQuoteUrl = "$baseUrl/assign-quote";
 
   static String motivationUrl = "$baseUrl/getthought";
-
 }

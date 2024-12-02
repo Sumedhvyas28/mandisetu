@@ -9,34 +9,45 @@ class CropCarePage extends StatefulWidget {
 }
 
 class _CropCarePageState extends State<CropCarePage> {
-  // Dummy crop care tips data
-  final List<Map<String, String>> cropCareTips = [
-    {
-      "crop": "Tomato",
-      "tip":
-          "Tomatoes require a lot of sunlight. Water regularly but ensure the soil drains well to prevent root."
-    },
-    {
-      "crop": "Carrot",
-      "tip":
-          "Carrots thrive in loose, sandy soil. Keep the soil moist and remove weeds that may interfere with root growth."
-    },
-    {
-      "crop": "Spinach",
-      "tip":
-          "Spinach prefers cooler temperatures and rich, well-drained soil. Keep the soil consistently moist."
-    },
-    {
-      "crop": "Cabbage",
-      "tip":
-          "Cabbage needs cool weather. Ensure it gets enough water and protection from pests like aphids and cabbage worms."
-    },
-    {
-      "crop": "Potato",
-      "tip":
-          "Potatoes grow best in loose, well-drained soil. Ensure regular watering but avoid soggy conditions."
-    },
-  ];
+  final TextEditingController cropController = TextEditingController();
+  final TextEditingController problemController = TextEditingController();
+
+  void findSolution() {
+    final crop = cropController.text.trim();
+    final problem = problemController.text.trim();
+
+    if (crop.isEmpty || problem.isEmpty) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Error'),
+          content: const Text('Please fill in both fields to find a solution.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    } else {
+      // Replace this with logic to find a solution based on the input.
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Solution'),
+          content: Text(
+              'Finding a solution for "$crop" with the problem "$problem".'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,37 +58,51 @@ class _CropCarePageState extends State<CropCarePage> {
         foregroundColor: Colors.white,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView.builder(
-          itemCount: cropCareTips.length,
-          itemBuilder: (context, index) {
-            final cropCare = cropCareTips[index];
-            return Card(
-              color: Colors.white,
-              elevation: 4,
-              margin: const EdgeInsets.only(bottom: 12.0),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0),
-              ),
-              child: ExpansionTile(
-                title: Text(
-                  cropCare['crop']!,
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Field for Crop Name
+            TextField(
+              controller: cropController,
+              decoration: InputDecoration(
+                labelText: 'Crop Name',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.0),
                 ),
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      cropCare['tip']!,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ),
-                ],
               ),
-            );
-          },
+            ),
+            const SizedBox(height: 16.0),
+
+            // Field for Problem Description
+            TextField(
+              controller: problemController,
+              decoration: InputDecoration(
+                labelText: 'Describe Your Problem',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+              ),
+              maxLines: 3,
+            ),
+            const SizedBox(height: 16.0),
+
+            // Button to Find Solution
+            ElevatedButton(
+              onPressed: findSolution,
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                backgroundColor: StyleConstants.darkGreen,
+              ),
+              child: const Text(
+                'Find Solution',
+                style: TextStyle(fontSize: 16.0, color: Colors.white),
+              ),
+            ),
+          ],
         ),
       ),
     );

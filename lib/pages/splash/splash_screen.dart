@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mandisetu/routes/route_constants.dart';
+import 'package:mandisetu/viewmodel/user_session.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -9,13 +10,29 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final UserSession _userSession = UserSession();
 
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, NamedRoutes.login);
-    },);
+    _initializeApp();
+  }
+
+  Future<void> _initializeApp() async {
+    await Future.delayed(const Duration(seconds: 4));
+
+    final isLoggedIn = await _userSession.isLoggedIn();
+    print("Is user logged in: $isLoggedIn");
+
+    if (mounted) {
+      if (isLoggedIn) {
+        print("User is logged in. Navigating to bottom tab...");
+        Navigator.pushReplacementNamed(context, NamedRoutes.bottomTab);
+      } else {
+        print("User is NOT logged in. Navigating to login page...");
+        Navigator.pushReplacementNamed(context, NamedRoutes.onboarding);
+      }
+    }
   }
 
   @override
@@ -28,9 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-
             Image.asset('assets/images/mandisetu_logo.png'),
-
           ],
         ),
       ),

@@ -14,7 +14,7 @@ class CommodityRepo {
   Future<Commodities> getCommodityRepo(dynamic header) async {
     try {
       dynamic response = await _apiServices.getGetApiWithHeaderResponse(
-          'https://stagging.jookwang.me/api/get-commodities', header);
+          'https://mandisetu.in/api/get-commodities', header);
       return response = Commodities.fromJson(response);
     } catch (e) {
       print('❌❌ $e');
@@ -25,7 +25,7 @@ class CommodityRepo {
   Future<Varieties> getVarietyRepo(dynamic id, dynamic header) async {
     try {
       dynamic response = await _apiServices.getGetApiWithHeaderResponse(
-          'https://stagging.jookwang.me/api/get-variety/$id', header);
+          'https://mandisetu.in/api/get-variety/$id', header);
       return response = Varieties.fromJson(response);
     } catch (e) {
       print('❌❌ $e');
@@ -33,11 +33,11 @@ class CommodityRepo {
     }
   }
 
-
-  Future<CommodityVariety> getVarietyByCommodityRepo(dynamic id, dynamic header) async {
+  Future<CommodityVariety> getVarietyByCommodityRepo(
+      dynamic id, dynamic header) async {
     try {
       dynamic response = await _apiServices.getGetApiWithHeaderResponse(
-        'https://stagging.jookwang.me/api/get-varieties-by-commodity/$id',
+        'https://mandisetu.in/api/get-varieties-by-commodity/$id',
         header,
       );
       return response = CommodityVariety.fromJson(response);
@@ -46,7 +46,6 @@ class CommodityRepo {
       throw e;
     }
   }
-
 
   Future<dynamic> addProductRepo({
     required String commodityId,
@@ -61,7 +60,7 @@ class CommodityRepo {
     required List<String> images,
     required Map<String, String> headers,
   }) async {
-    final url = Uri.parse('https://stagging.jookwang.me/api/add-product');
+    final url = Uri.parse('https://mandisetu.in/api/add-product');
 
     var requestMultipart = http.MultipartRequest('POST', url)
       ..fields['commodity_id'] = commodityId
@@ -72,14 +71,14 @@ class CommodityRepo {
       ..fields['description'] = description
       ..fields['unit'] = unit
       ..fields['state'] = state
-      ..fields['district'] = district
-    ;
+      ..fields['district'] = district;
 
     requestMultipart.headers.addAll(headers);
 
     for (String image in images) {
       print('Adding image: $image');
-      requestMultipart.files.add(await http.MultipartFile.fromPath('image[]', image));
+      requestMultipart.files
+          .add(await http.MultipartFile.fromPath('image[]', image));
     }
 
     final response = await requestMultipart.send();
@@ -96,12 +95,11 @@ class CommodityRepo {
     }
   }
 
-
   Future<void> addNewCommodityRepo(dynamic data, dynamic header) async {
     try {
       dynamic response = await _apiServices.getPostApiWithHeaderResponse(
-          'https://stagging.jookwang.me/api/add-commodity', data, header);
-      return response ;
+          'https://mandisetu.in/api/add-commodity', data, header);
+      return response;
     } catch (e) {
       print('❌❌ $e');
       throw e;
@@ -111,60 +109,58 @@ class CommodityRepo {
   Future<void> addNewVarietyRepo(dynamic data, dynamic header) async {
     try {
       dynamic response = await _apiServices.getPostApiWithHeaderResponse(
-          'https://stagging.jookwang.me/api/add-variety', data, header);
-      return response ;
+          'https://mandisetu.in/api/add-variety', data, header);
+      return response;
     } catch (e) {
       print('❌❌ $e');
       throw e;
     }
   }
 
-
-  Future<void> deleteCommodityRepo(dynamic data, dynamic header, dynamic id) async {
+  Future<void> deleteCommodityRepo(
+      dynamic data, dynamic header, dynamic id) async {
     try {
       dynamic response = await _apiServices.getPostApiWithHeaderResponse(
-          'https://stagging.jookwang.me/api/delete-commodity/$id', data, header);
-      return response ;
+          'https://mandisetu.in/api/delete-commodity/$id', data, header);
+      return response;
     } catch (e) {
       print('❌❌ $e');
       throw e;
     }
   }
 
-  Future<void> deleteVarietyRepo(dynamic data, dynamic header, dynamic id) async {
+  Future<void> deleteVarietyRepo(
+      dynamic data, dynamic header, dynamic id) async {
     try {
       dynamic response = await _apiServices.getPostApiWithHeaderResponse(
-          'https://stagging.jookwang.me/api/delete-variety/$id', data, header);
-      return response ;
+          'https://mandisetu.in/api/delete-variety/$id', data, header);
+      return response;
     } catch (e) {
       print('❌❌ $e');
       throw e;
     }
   }
 
-
-  Future<void> editCommodityRepo(dynamic data, dynamic header, dynamic id) async {
+  Future<void> editCommodityRepo(
+      dynamic data, dynamic header, dynamic id) async {
     try {
       dynamic response = await _apiServices.getPostApiWithHeaderResponse(
-          'https://stagging.jookwang.me/api/edit-commodity/$id', data, header);
-      return response ;
+          'https://mandisetu.in/api/edit-commodity/$id', data, header);
+      return response;
     } catch (e) {
       print('❌❌ $e');
       throw e;
     }
   }
 
-
-  Future<Stats> getStatsRepo(dynamic header, dynamic queryParams ) async {
+  Future<Stats> getStatsRepo(dynamic header, dynamic queryParams) async {
     try {
       dynamic response = await _apiServices.getGetApiWithQueryResponse(
-          'https://stagging.jookwang.me/api/get-stats', header, queryParams);
+          'https://mandisetu.in/api/get-stats', header, queryParams);
       return response = Stats.fromJson(response);
     } catch (e) {
       print('❌❌ $e');
       throw e;
     }
   }
-
-
 }

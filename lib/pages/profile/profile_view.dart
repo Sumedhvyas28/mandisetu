@@ -6,7 +6,10 @@ import 'package:mandisetu/pages/profile/directory/directory.dart';
 import 'package:mandisetu/pages/profile/refer/refer_and_earn.dart';
 import 'package:mandisetu/pages/profile/terms_and_privacy.dart';
 import 'package:mandisetu/pages/retailer/retailer_view.dart';
+import 'package:mandisetu/routes/route_constants.dart';
 import 'package:mandisetu/utils/component/reusable_row.dart';
+import 'package:mandisetu/viewmodel/user_session.dart';
+import 'package:provider/provider.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -14,6 +17,7 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final userPreference = Provider.of<UserSession>(context, listen: false);
 
     return Scaffold(
         appBar: AppBar(
@@ -177,9 +181,10 @@ class ProfileView extends StatelessWidget {
                           icon: Icons.logout,
                           text: 'Logout',
                           onPressed: () async {
-                            // await userPreference.signOut().then((value) {
-                            //   context.go('/login');
-                            // });
+                            await userPreference.signOut().then((value) {
+                              Navigator.pushReplacementNamed(
+                                  context, NamedRoutes.login);
+                            });
                           },
                         ),
                       ],

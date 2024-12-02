@@ -167,7 +167,7 @@ class TraderProductCard extends StatelessWidget {
                         MaterialPageRoute(
                           builder: (context) => FullScreenImage(
                             imageUrl:
-                                'https://stagging.jookwang.me/ProductImages/${data.image![index]}',
+                                'https://mandisetu.in/ProductImages/${data.image![index]}',
                           ),
                         ),
                       );
@@ -176,7 +176,7 @@ class TraderProductCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5.0),
                       child: CachedNetworkImage(
                         imageUrl:
-                            'https://stagging.jookwang.me/ProductImages/${data.image![index]}',
+                            'https://mandisetu.in/ProductImages/${data.image![index]}',
                         fit: BoxFit.cover,
                         width: MediaQuery.of(context).size.width,
                         placeholder: (context, url) => const SpinKitPulse(

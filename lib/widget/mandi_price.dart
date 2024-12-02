@@ -51,13 +51,13 @@ class _MandiPriceState extends State<MandiPrice> {
                     decoration: const BoxDecoration(
                       color: Color(0xffdcf9e3),
                       image: DecorationImage(
-                          image: AssetImage('assets/images/mandi_price_bg.png'), fit: BoxFit.cover),
+                          image: AssetImage('assets/images/mandi_price_bg.png'),
+                          fit: BoxFit.cover),
                     ),
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
-
                           Container(
                             width: 140,
                             padding: const EdgeInsets.only(left: 20),
@@ -72,22 +72,26 @@ class _MandiPriceState extends State<MandiPrice> {
                           ),
                           const SizedBox(width: 20),
                           InkWell(
-                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => AllCommodity(),));
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => AllCommodity(),
+                                  ));
                             },
                             child: Container(
                               height: 240,
                               width: 150,
                               decoration: BoxDecoration(
-                                // color: const Color(0xffdcf9e3),
-                                color: Colors.white30,
-                                borderRadius: BorderRadius.circular(10)
-                              ),
+                                  // color: const Color(0xffdcf9e3),
+                                  color: Colors.white30,
+                                  borderRadius: BorderRadius.circular(10)),
                               child: const Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Icon(Icons.arrow_circle_right_outlined, size: 30),
+                                  Icon(Icons.arrow_circle_right_outlined,
+                                      size: 30),
                                   SizedBox(height: 8),
                                   Text("More"),
                                 ],
@@ -104,12 +108,12 @@ class _MandiPriceState extends State<MandiPrice> {
                     color: StyleConstants.darkDarkGreen,
                     child: Center(
                         child: Text(
-                          'Get daily updated/realtime mandi rates',
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelLarge!
-                              .copyWith(color: Colors.white),
-                        )),
+                      'Get daily updated/realtime mandi rates',
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelLarge!
+                          .copyWith(color: Colors.white),
+                    )),
                   ),
                 ],
               );
@@ -151,15 +155,18 @@ class _MandiPriceState extends State<MandiPrice> {
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               shrinkWrap: true,
-                              itemCount: mandiRatesViewModel.allStaticProducts.data!.data!.length,
+                              itemCount: mandiRatesViewModel
+                                  .allStaticProducts.data!.data!.length,
                               itemBuilder: (context, index) {
-                                final item = mandiRatesViewModel.allStaticProducts.data!.data![index];
+                                final item = mandiRatesViewModel
+                                    .allStaticProducts.data!.data![index];
                                 return GestureDetector(
                                   onTap: () {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => AnalyticsView(item: item),
+                                          builder: (context) =>
+                                              AnalyticsView(item: item),
                                         ));
                                   },
                                   child: Padding(
@@ -189,14 +196,12 @@ class _MandiPriceState extends State<MandiPrice> {
                                                 borderRadius:
                                                     BorderRadius.circular(5),
                                                 child: Image.network(
-                                                  'https://stagging.jookwang.me/StaticImage/${item.image}',
+                                                  'https://mandisetu.in/StaticImage/${item.image}',
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
                                             ),
-
                                             const SizedBox(height: 5),
-
                                             Text(
                                               item.commodity!,
                                               style: Theme.of(context)
@@ -205,9 +210,7 @@ class _MandiPriceState extends State<MandiPrice> {
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                             ),
-
                                             const Expanded(child: SizedBox()),
-
                                             SizedBox(
                                               width: double.infinity,
                                               child: Column(
@@ -244,25 +247,28 @@ class _MandiPriceState extends State<MandiPrice> {
                               },
                             ),
                           ),
-
                           const SizedBox(width: 10),
                           InkWell(
-                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => AllCommodity(),));
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => AllCommodity(),
+                                  ));
                             },
                             child: Container(
                               height: 220,
                               width: 150,
                               decoration: BoxDecoration(
-                                // color: const Color(0xffdcf9e3),
+                                  // color: const Color(0xffdcf9e3),
                                   color: Colors.white30,
-                                  borderRadius: BorderRadius.circular(10)
-                              ),
+                                  borderRadius: BorderRadius.circular(10)),
                               child: const Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Icon(Icons.arrow_circle_right_outlined, size: 30),
+                                  Icon(Icons.arrow_circle_right_outlined,
+                                      size: 30),
                                   SizedBox(height: 8),
                                   Text("More"),
                                 ],
@@ -270,7 +276,6 @@ class _MandiPriceState extends State<MandiPrice> {
                             ),
                           ),
                           const SizedBox(width: 20),
-
                         ],
                       ),
                     ),

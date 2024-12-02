@@ -50,81 +50,154 @@ class _BlogsPageState extends State<BlogsPage> {
         itemCount: blogs.length,
         itemBuilder: (context, index) {
           final blog = blogs[index];
-          return Card(
-            elevation: 4,
-            margin: const EdgeInsets.only(bottom: 16.0),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Blog image
-                ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(15.0),
-                    topRight: Radius.circular(15.0),
-                  ),
-                  child: Image.network(
-                    blog['image']!,
-                    height: 180,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BlogDetailsPage(blog: blog),
                 ),
-                // Blog content
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Blog title
-                      Text(
-                        blog['title']!,
-                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: StyleConstants.darkGreen,
-                            ),
-                      ),
-                      const SizedBox(height: 8),
-                      // Blog description
-                      Text(
-                        blog['description']!,
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              color: Colors.grey[700],
-                              height: 1.5,
-                            ),
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const SizedBox(height: 12),
-                      // Blog metadata (author and date)
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "By ${blog['author']}",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall!
-                                .copyWith(color: Colors.grey[600]),
-                          ),
-                          Text(
-                            blog['date']!,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall!
-                                .copyWith(color: Colors.grey[600]),
-                          ),
-                        ],
-                      ),
-                    ],
+              );
+            },
+            child: Card(
+              elevation: 4,
+              margin: const EdgeInsets.only(bottom: 16.0),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Blog image
+                  ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(15.0),
+                      topRight: Radius.circular(15.0),
+                    ),
+                    child: Image.network(
+                      blog['image']!,
+                      height: 180,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                ),
-              ],
+                  // Blog content
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Blog title
+                        Text(
+                          blog['title']!,
+                          style:
+                              Theme.of(context).textTheme.titleLarge!.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: StyleConstants.darkGreen,
+                                  ),
+                        ),
+                        const SizedBox(height: 8),
+                        // Blog description
+                        Text(
+                          blog['description']!,
+                          style:
+                              Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    color: Colors.grey[700],
+                                    height: 1.5,
+                                  ),
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(height: 12),
+                        // Blog metadata (author and date)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "By ${blog['author']}",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall!
+                                  .copyWith(color: Colors.grey[600]),
+                            ),
+                            Text(
+                              blog['date']!,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall!
+                                  .copyWith(color: Colors.grey[600]),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class BlogDetailsPage extends StatelessWidget {
+  final Map<String, String> blog;
+
+  const BlogDetailsPage({super.key, required this.blog});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(blog['title']!),
+        backgroundColor: StyleConstants.darkGreen,
+        foregroundColor: Colors.white,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.network(
+              blog['image']!,
+              height: 200,
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
+            const SizedBox(height: 16),
+            Text(
+              blog['title']!,
+              style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: StyleConstants.darkGreen,
+                  ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              "By ${blog['author']} | ${blog['date']}",
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall!
+                  .copyWith(color: Colors.grey),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              blog['description']! +
+                  blog['description']! +
+                  blog['description']! +
+                  blog['description']! +
+                  blog['description']! +
+                  blog['description']! +
+                  blog['description']!,
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    color: Colors.grey[700],
+                    height: 1.5,
+                  ),
+            ),
+          ],
+        ),
       ),
     );
   }

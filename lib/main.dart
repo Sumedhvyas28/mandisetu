@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:mandisetu/starter_app.dart';
 
-
 // @pragma('vm:entry-point')
 // Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message)async {
 //   await Firebase.initializeApp();
@@ -27,7 +26,7 @@ void main() async {
   runApp(
     DevicePreview(
       // enabled: !kReleaseMode,
-      enabled: false,
+      enabled: true,
       builder: (context) => StarterApp(),
     ),
   );

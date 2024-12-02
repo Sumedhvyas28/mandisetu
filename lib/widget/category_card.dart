@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mandisetu/constants/style/style_constants.dart';
 import 'package:mandisetu/widget/category/blogs.dart';
 import 'package:mandisetu/widget/category/crop_care.dart';
-import 'package:mandisetu/widget/category/faq.dart';
+import 'package:mandisetu/widget/category/guides.dart';
 import 'package:mandisetu/widget/category/news.dart';
 import 'package:mandisetu/widget/category/news_bullettin.dart';
 import 'package:mandisetu/widget/category/weather.dart';
@@ -47,7 +47,7 @@ class _CategoryCardState extends State<CategoryCard>
       "image": "https://cdn-icons-png.flaticon.com/512/8524/8524310.png",
     },
     {
-      "title": "Make FAQ",
+      "title": "Guides",
       "image": "https://cdn-icons-png.flaticon.com/512/651/651009.png",
     },
   ];
@@ -102,7 +102,7 @@ class _CategoryCardState extends State<CategoryCard>
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => NewsBullettin()), // Replace with your page
+              builder: (context) => NewsBulletin()), // Replace with your page
         );
         break;
       case 'Blogs':
@@ -133,7 +133,7 @@ class _CategoryCardState extends State<CategoryCard>
               builder: (context) => CropCarePage()), // Replace with your page
         );
         break;
-      case 'Make FAQ':
+      case 'Guides':
         Navigator.push(
           context,
           MaterialPageRoute(

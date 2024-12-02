@@ -9,7 +9,7 @@ class TraderRepo {
   Future<Product> getAllProductRepo(dynamic header) async {
     try {
       dynamic response = await _apiServices.getGetApiWithHeaderResponse(
-          'https://stagging.jookwang.me/api/get-products', header);
+          'https://mandisetu.in/api/get-products', header);
       return response = Product.fromJson(response);
     } catch (e) {
       print('❌❌ $e');
@@ -20,8 +20,7 @@ class TraderRepo {
   Future<Dukandar> getDukandarRepo(dynamic header) async {
     try {
       dynamic response = await _apiServices.getGetApiWithHeaderResponse(
-          'https://stagging.jookwang.me/api/get-dukandars-by-mandivyapari',
-          header);
+          'https://mandisetu.in/api/get-dukandars-by-mandivyapari', header);
       return response = Dukandar.fromJson(response);
     } catch (e) {
       print('❌❌ $e');
@@ -32,7 +31,7 @@ class TraderRepo {
   Future<dynamic> addDukandarRepo(dynamic data, dynamic header) async {
     try {
       dynamic response = await _apiServices.getPostApiWithHeaderResponse(
-          "https://stagging.jookwang.me/api/add-dukandar", data, header);
+          "https://mandisetu.in/api/add-dukandar", data, header);
       return response = response;
     } catch (e) {
       print('❌❌ Error in Add Dukandar ${e}');
@@ -43,9 +42,7 @@ class TraderRepo {
   Future<dynamic> interestedFormRepo(dynamic data, dynamic header) async {
     try {
       dynamic response = await _apiServices.getPostApiWithHeaderResponse(
-          "https://stagging.jookwang.me/api/send-purchase-request",
-          data,
-          header);
+          "https://mandisetu.in/api/send-purchase-request", data, header);
       return response = response;
     } catch (e) {
       print('❌❌ Error in  Interested Form ${e}');
@@ -56,7 +53,7 @@ class TraderRepo {
   Future<dynamic> addSalesRepo(dynamic data, dynamic header) async {
     try {
       dynamic response = await _apiServices.getPostApiWithHeaderResponse(
-          "https://stagging.jookwang.me/api/add-sales", data, header);
+          "https://mandisetu.in/api/add-sales", data, header);
       return response = response;
     } catch (e) {
       print('❌❌ Error in  Interested Form ${e}');
@@ -64,17 +61,15 @@ class TraderRepo {
     }
   }
 
-  Future<dynamic> deleteWholesalerProductRepo(dynamic data, dynamic header, id) async {
+  Future<dynamic> deleteWholesalerProductRepo(
+      dynamic data, dynamic header, id) async {
     try {
       dynamic response = await _apiServices.getPostApiWithHeaderResponse(
-          "https://stagging.jookwang.me/api/delete-product/$id", data, header);
+          "https://mandisetu.in/api/delete-product/$id", data, header);
       return response = response;
     } catch (e) {
       print('❌❌ Error in  deleteWholesalerProductRepo ${e}');
       throw e;
     }
   }
-
-
-
 }

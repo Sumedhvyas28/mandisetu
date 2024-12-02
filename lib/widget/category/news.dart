@@ -67,7 +67,6 @@ class _NewsPagesState extends State<NewsPages> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Category title
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Text(
@@ -78,10 +77,24 @@ class _NewsPagesState extends State<NewsPages> {
                       ),
                 ),
               ),
-              // News items for this category
               Column(
                 children: (category['news'] as List<Map<String, String>>)
-                    .map((newsItem) => Card(
+                    .map(
+                      (newsItem) => GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => NewsDetailsPage(
+                                title: newsItem['title']!,
+                                description: newsItem['description']!,
+                                image: newsItem['image']!,
+                                date: newsItem['date']!,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Card(
                           color: Colors.white,
                           elevation: 4,
                           margin: const EdgeInsets.only(bottom: 16.0),
@@ -90,7 +103,6 @@ class _NewsPagesState extends State<NewsPages> {
                           ),
                           child: Row(
                             children: [
-                              // Image section
                               ClipRRect(
                                 borderRadius: const BorderRadius.only(
                                   topLeft: Radius.circular(15.0),
@@ -103,7 +115,6 @@ class _NewsPagesState extends State<NewsPages> {
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                              // News content section
                               Expanded(
                                 child: Padding(
                                   padding: const EdgeInsets.all(12.0),
@@ -145,13 +156,90 @@ class _NewsPagesState extends State<NewsPages> {
                               ),
                             ],
                           ),
-                        ))
+                        ),
+                      ),
+                    )
                     .toList(),
               ),
               const SizedBox(height: 24),
             ],
           );
         },
+      ),
+    );
+  }
+}
+
+class NewsDetailsPage extends StatelessWidget {
+  final String title;
+  final String description;
+  final String image;
+  final String date;
+
+  const NewsDetailsPage({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.image,
+    required this.date,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('News Details'),
+        backgroundColor: StyleConstants.darkGreen,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Image.network(
+                image,
+                height: 200,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                    color: StyleConstants.darkGreen,
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              date,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall!
+                  .copyWith(color: Colors.grey),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              description +
+                  description +
+                  description +
+                  description +
+                  description +
+                  description +
+                  description +
+                  description +
+                  description +
+                  description,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium!
+                  .copyWith(color: Colors.grey[800]),
+            ),
+          ],
+        ),
       ),
     );
   }

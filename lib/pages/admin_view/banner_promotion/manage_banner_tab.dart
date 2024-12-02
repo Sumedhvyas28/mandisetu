@@ -13,7 +13,6 @@ class ManageBannerTab extends StatefulWidget {
 }
 
 class _ManageBannerTabState extends State<ManageBannerTab> {
-
   AdminProductRequest provider = AdminProductRequest();
 
   @override
@@ -38,13 +37,13 @@ class _ManageBannerTabState extends State<ManageBannerTab> {
             case Status.ERROR:
               return const OopsErrorWidget();
             case Status.COMPLETED:
-              if(value.allBannerList.data!.banner!.isEmpty) {
+              if (value.allBannerList.data!.banner!.isEmpty) {
                 return const Center(
                   child: Text('No banner image yet!'),
                 );
               }
               return RefreshIndicator(
-                onRefresh: () async{
+                onRefresh: () async {
                   await provider.getBanners();
                 },
                 child: ListView.builder(
@@ -65,7 +64,7 @@ class _ManageBannerTabState extends State<ManageBannerTab> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(10),
                             child: Image.network(
-                              "https://stagging.jookwang.me/BannerImages/${value.allBannerList.data!.banner![index]}",
+                              "https://mandisetu.in/BannerImages/${value.allBannerList.data!.banner![index]}",
                               fit: BoxFit.cover,
                               width: double.infinity,
                               height: double.infinity,
@@ -76,8 +75,9 @@ class _ManageBannerTabState extends State<ManageBannerTab> {
                           top: 5,
                           right: 5,
                           child: GestureDetector(
-                            onTap: () async{
-                              await provider.deleteBanner(context, value.allBannerList.data!.id![index]);
+                            onTap: () async {
+                              await provider.deleteBanner(context,
+                                  value.allBannerList.data!.id![index]);
                               await provider.getBanners();
                             },
                             child: Container(
